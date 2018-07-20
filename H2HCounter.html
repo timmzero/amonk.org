@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Navigator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="hivis.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  .col-xs-2 {background-color:green}
+  body, html, .container-fluid {
+         height: 100%;
+    }</style>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+
+
+<!-- NAVBAR AFFIXED -->
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">101 Donations</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">HOME</a></li>
+      <li><a href="#">H2H</a></li>
+      <li><a href="#">EVENT</a></li>
+      <li><a href="#">STREET</a></li>
+      <li><a href="#">SWITCH USER</a></li>
+      <li><a href="#">LOGIN</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Map Container-->
+<div id="map" style="width:100%;height:60%"></div>
+   <script>
+      // Note: This requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed...", it means you probably did not give permission for the browser to
+      // locate you.
+      var map, infoWindow;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -45, lng: 0},
+          zoom: 6
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+        // HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Your spirit animal senses your presence. Positive chi energy is being focused around this location to help you out.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Your spirit animal is trying to find you but feels a little lost, and confused. Did you allow location sharing? ..because it kinda neeeeds that.' :
+                              'Whoa! Looks like your browser is old. OLLLDDD! Have you heard of "updating"? ..because you should try updating. Anything more recent than your grandma should do the trick: Firefox 3.5+, Chrome 5.0+, Safari 5.0+, Opera 10.60+, Internet Explorer 9.0+');
+        infoWindow.open(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOKn86bD-vG61WfxTnYnXF4jT3icwWcJc&callback=initMap">
+    </script>
+
+<!-- TALLY BUTTONS -->
+<div class="row" align="center">
+  <div class="col-sm-3"><button type="button" class="btn btn-primary btn-lg btn-block">APPROACH</button></div>
+  <div class="col-sm-3"><button type="button" class="btn btn-primary btn-lg btn-block">CONTACT</button></div>
+  <div class="col-sm-3"><button type="button" class="btn btn-primary btn-lg btn-block">CONNECTION</button></div>
+  <div class="col-sm-3"><button type="button" class="btn btn-primary btn-lg btn-block">CALL BACK</button></div>
+</div>
+<div class="row" align="center">
+<div class="col-sm-3"></div>
+<div class="col-sm-6"><button type="button" class="btn btn-primary btn-lg btn-block">LET'S DO IT</button></div>
+<div class="col-sm-6"></div>
+</body>
